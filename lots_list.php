@@ -31,4 +31,19 @@
              'price' => '5400',
              'url' => 'img/lot-6.jpg'],
         ];
-?>
+
+    $products_categories = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
+
+    session_start();
+
+    if(isset($_SESSION['user'])) {
+        $is_auth = true;
+
+        $user_name = $_SESSION['user']['name'];
+        $user_avatar = 'img/user.jpg';
+    } else {
+        $is_auth = false;
+
+        $user_name = null;
+        $user_avatar = null;
+    }

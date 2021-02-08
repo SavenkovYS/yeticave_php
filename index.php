@@ -7,13 +7,6 @@
 	$hours_until_tomorrow = floor($time_until_tomorrow / 3600);
 	$minutes_until_tomorrow = floor($time_until_tomorrow % 3600 / 60);
 
-	$is_auth = (bool) rand(0, 1);
-
-	$user_name = 'Константин';
-	$user_avatar = 'img/user.jpg';
-
-	$products_categories = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
-
 	function set_price($price) {
 	    $formated_price = ceil($price);
 	    if ($formated_price < 1000) {
@@ -39,4 +32,3 @@
 	]);
 
 	echo $layout_content;
-?>

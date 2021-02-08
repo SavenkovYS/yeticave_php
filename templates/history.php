@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?=$title; ?></title>
+    <title>История просмотров</title>
     <link href="css/normalize.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
@@ -11,53 +12,114 @@
 <header class="main-header">
     <div class="main-header__container container">
         <h1 class="visually-hidden">YetiCave</h1>
-        <a href="index.php" class="main-header__logo">
+        <a class="main-header__logo" href="index.html">
             <img src="img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
         </a>
         <form class="main-header__search" method="get" action="https://echo.htmlacademy.ru">
             <input type="search" name="search" placeholder="Поиск лота">
             <input class="main-header__search-btn" type="submit" name="find" value="Найти">
         </form>
-        <a class="main-header__add-lot button" href="add.php">Добавить лот</a>
-
+        <a class="main-header__add-lot button" href="add-lot.html">Добавить лот</a>
         <nav class="user-menu">
-
-            <?php if ($is_auth): ?>
-            <div class="user-menu__image">
-                <img src="img/user.jpg" width="40" height="40" alt="Пользователь">
-            </div>
-            <div class="user-menu__logged">
-                <p><?=$user_name ;?></p>
-                <a href="logout.php">Выход</a>
-            </div>
-            <?php else: ?>
             <ul class="user-menu__list">
                 <li class="user-menu__item">
-                    <a href="login.php">Регистрация</a>
+                    <a href="sign-up.html">Регистрация</a>
                 </li>
                 <li class="user-menu__item">
-                    <a href="#">Вход</a>
+                    <a href="login.html">Вход</a>
                 </li>
             </ul>
-            <?php endif; ?>
-        <!-- здесь должен быть PHP код для показа аватара пользователя -->
         </nav>
     </div>
 </header>
-    <?=$content; ?>
+
+<main>
+    <nav class="nav">
+        <ul class="nav__list container">
+            <li class="nav__item nav__item--current">
+                <a href="all-lots.html">Доски и лыжи</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Крепления</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Ботинки</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Одежда</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Инструменты</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Разное</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        <section class="lots">
+            <h2>Все лоты в категории <span>«Доски и лыжи»</span></h2>
+            <ul class="lots__list">
+                <?php if(count($lots_indices)): foreach($lots_indices as $index): ?>
+                <li class="lots__item lot">
+                    <div class="lot__image">
+                        <img src="img/lot-<?=$index; ?>.jpg" width="350" height="260" alt="Сноуборд">
+                    </div>
+                    <div class="lot__info">
+                        <span class="lot__category"><?=$lots[$index]['category'] ;?></span>
+                        <h3 class="lot__title"><a class="text-link" href="lot.html"><?=$lots[$index]['name'] ;?></a></h3>
+                        <div class="lot__state">
+                            <div class="lot__rate">
+                                <span class="lot__amount">Стартовая цена</span>
+                                <span class="lot__cost"><?=$lots[$index]['price'] ;?><b class="rub">р</b></span>
+                            </div>
+                            <div class="lot__timer timer">
+                                16:54:12
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <?php endforeach; ?>
+                <?php endif; ?>
+            </ul>
+        </section>
+        <ul class="pagination-list">
+            <li class="pagination-item pagination-item-prev"><a>Назад</a></li>
+            <li class="pagination-item pagination-item-active"><a>1</a></li>
+            <li class="pagination-item"><a href="#">2</a></li>
+            <li class="pagination-item"><a href="#">3</a></li>
+            <li class="pagination-item"><a href="#">4</a></li>
+            <li class="pagination-item pagination-item-next"><a href="#">Вперед</a></li>
+        </ul>
+    </div>
+</main>
+
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
-            <?php foreach($products_categories as $key => $value): ?>
             <li class="nav__item">
-                <a href="all-lots.html"><?=$value; ?></a>
+                <a href="all-lots.html">Доски и лыжи</a>
             </li>
-            <?php endforeach; ?>
+            <li class="nav__item">
+                <a href="all-lots.html">Крепления</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Ботинки</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Одежда</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Инструменты</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Разное</a>
+            </li>
         </ul>
     </nav>
     <div class="main-footer__bottom container">
         <div class="main-footer__copyright">
-            <p>© 2018, YetiCave</p>
+            <p>© 2017, YetiCave</p>
             <p>Интернет-аукцион сноубордического и горнолыжного снаряжения</p>
         </div>
         <div class="main-footer__social social">
@@ -91,5 +153,7 @@
         </div>
     </div>
 </footer>
+
 </body>
 </html>
+

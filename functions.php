@@ -3,12 +3,20 @@
 		if(is_readable($template)) {
 			ob_start();
 			extract($data);
-			echo require_once($template);
+			require_once($template);
 		} else {
-			echo '';
+			return '';
 		}
 
 		$html = ob_get_clean();
 		return $html;
 	};
-?>
+
+	function searchUserByEmail($email, $users) {
+	    foreach($users as $user) {
+	        if($user['email'] == $email) {
+	            return $user;
+            }
+        }
+        return false;
+    }
