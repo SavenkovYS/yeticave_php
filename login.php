@@ -38,7 +38,6 @@
         }
     } else {
         if (isset($_SESSION['user'])) {
-            echo 'you have already been here, mate';
             $login_content = include_template('./templates/login.php', ['username' => $_SESSION['user']['name']]);
         } else {
             $login_content = include_template('./templates/login.php', []);

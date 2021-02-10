@@ -20,3 +20,12 @@
         }
         return false;
     }
+
+    function isEmailUsed($email, $users) {
+        foreach($users as $user) {
+            if($user['email'] == $email) {
+                return true;
+            }
+        }
+        return false;
+    }
