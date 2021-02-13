@@ -1,6 +1,8 @@
 <?php
-    require_once('functions.php');
-    require_once('lots_list.php');
+    require_once ('functions.php');
+    require_once ('lots_list.php');
+    require_once ('userdata.php');
+    require_once ('mysql_helper.php');
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $lot = $_POST;
@@ -40,18 +42,60 @@
             $errors['file'] = 'Вы не загрузили файл';
         }
 
+        if(!count($errors)) {
+            if(!$link) {
+                $error = mysqli_connect_error();
+                $page_content = include_template('./templates/add.php', ['error' => $error]);
+            } else {
+                var_dump($lot);
+                $start_date = date('Y-m-d', time());
+                $img_path = "uploads/" . $lot['path'];
+                $query_data = [
+                  $lot['lot-name'],
+                  $lot['category'],
+                  $lot['message'],
+                  $img_path,
+                  $lot['lot-rate'],
+                  $lot['lot-step'],
+                  $start_date,
+                  $lot['lot-date']
+                ];
+
+                $sql = 'INSERT INTO `lots` (`name`, `category_id`, `description`, `img`, `price`, `step`, `create_ts`, `expire_ts`)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+
+                $stmt = db_get_prepare_stmt($link, $sql, $query_data);
+                $result = mysqli_stmt_execute($stmt);
+                $page_content = include_template('./templates/add.php', [
+                    'lot' => $lot,
+                    'map' => $map,
+                    'is_auth' => $is_auth
+                ]);
+
+            }
+        }
+
         if(count($errors)) {
-            $add_lot_content = include_template('./templates/add.php', [
+            $page_content = include_template('./templates/add.php', [
                 'lot' => $lot,
                 'errors' => $errors,
                 'map' => $map,
                 'is_auth' => $is_auth
             ]);
-        } else {
-            $add_lot_content = include_template('./templates/lot.php', ['lot' => $lot]);
         }
+
     } else {
-        $add_lot_content = include_template('./templates/add.php', ['is_auth' => $is_auth]);
+        $page_content = include_template('./templates/add.php', ['is_auth' => $is_auth]);
     }
 
-    echo $add_lot_content;
+    $layout_content = include_template('./templates/layout.php', [
+        'products_categories' => $products_categories,
+        'content' => $page_content,
+        'title' => 'Добавить лот',
+        'is_auth' => $is_auth,
+        'user_name' => $user_name,
+        'user_avatar' => $user_avatar
+    ]);
+
+    echo $layout_content;
+

@@ -24,7 +24,7 @@
 
             <?php if ($is_auth): ?>
             <div class="user-menu__image">
-                <img src="img/user.jpg" width="40" height="40" alt="Пользователь">
+                <img src="<?=$user_avatar; ?>" width="40" height="40" alt="Пользователь">
             </div>
             <div class="user-menu__logged">
                 <p><?=$user_name ;?></p>
@@ -48,9 +48,9 @@
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
-            <?php foreach($products_categories as $key => $value): ?>
+            <?php foreach($products_categories as $category): ?>
             <li class="nav__item">
-                <a href="all-lots.html"><?=$value; ?></a>
+                <a href="all-lots.html"><?=$category['name']; ?></a>
             </li>
             <?php endforeach; ?>
         </ul>

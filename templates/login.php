@@ -22,7 +22,11 @@
         </ul>
     </nav>
     <?php $classname = isset($errors) ? "form--invalid" : ""; ?>
-    <form class="form container <?=$classname; ?>" action="login.php" method="post"> <!-- form--invalid -->
+    <form class="form container <?=$classname; ?>" action="login.php" method="post">
+        <?php isset($_GET['val']) === 'success' ? $success_text = 'Теперь Вы можете войти, используя свой email и пароль': null; ?>
+        <?php if (isset($success_text)): ?>
+        <h3><?=$success_text; ?></h3>
+        <?php endif; ?>
         <h2>Вход</h2>
         <?php $classname = isset($errors['email']) ? "form__item--invalid" : "";
         $value = isset($form['email']) ? $form['email'] : ""; ?>

@@ -21,8 +21,11 @@
             </li>
         </ul>
     </nav>
+    <?php if(isset($error)): ?>
+    <?='Просим прощение - произошла ошибка'; ?>
+    <?php else: ?>
     <?php $classname = isset($errors) ? "form--invalid" : ""; ?>
-    <form class="form container <?=$classname; ?>" action="sign-up.php" method="post"> <!-- form--invalid -->
+    <form class="form container <?=$classname; ?>" enctype="multipart/form-data" action="sign-up.php" method="post"> <!-- form--invalid -->
         <h2>Регистрация нового аккаунта</h2>
         <?php $classname = isset($errors['email']) ? "form__item--invalid" : "";
         $value = isset($form['email']) ? $form['email'] : "" ?>
@@ -60,7 +63,7 @@
                 </div>
             </div>
             <div class="form__input-file">
-                <input class="visually-hidden" type="file" id="photo2" value="">
+                <input class="visually-hidden" name="avatar" type="file" id="photo2" value="">
                 <label for="photo2">
                     <span>+ Добавить</span>
                 </label>
@@ -71,3 +74,4 @@
         <a class="text-link" href="#">Уже есть аккаунт</a>
     </form>
 </main>
+<?php endif; ?>

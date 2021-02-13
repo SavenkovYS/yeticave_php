@@ -1,25 +1,21 @@
 <?php
-	require_once('functions.php');
-    require_once('lots_list.php');
+	require_once ('functions.php');
+    require_once ('lots_list.php');
+    require_once ('init.php');
+    require_once ('userdata.php');
 
 	date_default_timezone_set('Europe/Moscow');
-	$time_until_tomorrow = strtotime('tomorrow') - time();
-	$hours_until_tomorrow = floor($time_until_tomorrow / 3600);
-	$minutes_until_tomorrow = floor($time_until_tomorrow % 3600 / 60);
 
-	function set_price($price) {
-	    $formated_price = ceil($price);
-	    if ($formated_price < 1000) {
-	        return $formated_price;
-	    } else {
-	        return number_format($formated_price, 0, '', ' ');
-	    }
-	};
+	for ($i = 0; $i < count($lots); $i++) {
+	    $hours_until_expire = floor($lots[$i]['time_until_expire'] / 3600);
+        $minutes_until_expire = floor($lots[$i]['time_until_expire'] % 3600 / 60);
+        $lots[$i]['time_until_expire'] = $hours_until_expire . ":" . $minutes_until_expire;
+    }
+
+
 
 	$page_content = include_template('./templates/index.php', [
-			'lots' => $lots,
-			'hours_until_tomorrow' => $hours_until_tomorrow,
-			'minutes_until_tomorrow' => $minutes_until_tomorrow
+			'lots' => $lots
 	]);
 
 	$layout_content = include_template('./templates/layout.php', [

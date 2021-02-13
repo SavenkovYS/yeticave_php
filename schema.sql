@@ -3,6 +3,7 @@ CREATE TABLE users (
     email CHAR(128),
     password CHAR(64),
     name CHAR(15),
+    avatar CHAR(128),
     message TEXT
 );
 CREATE UNIQUE INDEX id ON users(id);
@@ -25,8 +26,8 @@ CREATE TABLE lots (
     step SMALLINT,
     img CHAR(50),
     description TEXT,
-    create_ts INT,
-    expire_ts BIGINT,
+    create_ts CHAR(50),
+    expire_ts CHAR(50),
     bets_number INT,
     is_open CHAR(3)
 );
