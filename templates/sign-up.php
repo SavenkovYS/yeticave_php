@@ -51,7 +51,7 @@
         $value = isset($form['message']) ? $form['message'] : "" ?>
         <div class="form__item <?=$classname; ?>">
             <label for="message">Контактные данные*</label>
-            <textarea id="message" name="message" placeholder="Напишите как с вами связаться" value="<?=$value; ?>" required></textarea>
+            <textarea id="message" name="message" placeholder="Напишите как с вами связаться" required><?=$value; ?></textarea>
             <span class="form__error">Напишите как с вами связаться</span>
         </div>
         <div class="form__item form__item--file form__item--last">

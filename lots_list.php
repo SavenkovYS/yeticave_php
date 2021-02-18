@@ -1,9 +1,6 @@
 <?php
-require_once('init.php');
-
-if (!isset($_SESSION)) {
-    session_start();
-}
+require_once ('init.php');
+require_once ('functions.php');
 
 if (!$link) {
     $error = mysqli_connect_error();
@@ -14,15 +11,14 @@ if (!$link) {
     if ($result) {
         $lots = mysqli_fetch_all($result, MYSQLI_ASSOC);
         for ($i = 0; $i < count($lots); $i++) {
-            $time_until_expire = strtotime($lots[$i]['expire_ts']) - time();
-            $lots[$i]['time_until_expire'] = $time_until_expire;
+            $lots[$i]['time_until_expire'] = $lots[$i]['expire_ts'] - time();
         }
     } else {
         $error = mysqli_error($link);
     }
 }
 
-if(!$link) {
+if (!$link) {
     $error = mysqli_connect_error();
 } else {
     $sql = 'SELECT * FROM `categories`';
