@@ -4,7 +4,7 @@ require_once ('lots_list.php');
 require_once ('functions.php');
 require_once ('userdata.php');
 
-if(!$link) {
+if (!$link) {
     $error = mysqli_connect_error();
 } else {
     $search = trim($_GET['search']) ?? '';

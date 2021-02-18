@@ -20,7 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Проверка, существует ли такая почта
+    // Проверка почты
+
     if (!count($errors) and $user = search_user_by_email($form['email'], $users)) {
 
         // Проверка правильности пароля
@@ -51,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $layout_content = include_template('./templates/layout.php', [
     'content' => $login_content,
     'products_categories' => $products_categories,
+    'title' => 'Вход в аккаунт',
     'is_auth' => $is_auth,
     'user_name' => $user_name,
     'user_avatar' => $user_avatar

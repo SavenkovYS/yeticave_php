@@ -53,10 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                  htmlspecialchars($form['name']),
                  password_hash($form['password'], PASSWORD_DEFAULT),
                  htmlspecialchars($form['message']),
-                 isset($form['path']) ? $form['path'] : null
+                 isset($form['path']) ? $form['path'] : null,
+                 time()
              ];
 
-             $sql = 'INSERT INTO `users` (`email`, `name`, `password`, `message`, `avatar`) VALUES (?, ?, ?, ?, ?)';
+             $sql = 'INSERT INTO `users` (`email`, `name`, `password`, `message`, `avatar`, `reg_ts`) VALUES (?, ?, ?, ?, ?, ?)';
              $stmt = db_get_prepare_stmt($link, $sql, $query_data);
              $result = mysqli_stmt_execute($stmt);
 

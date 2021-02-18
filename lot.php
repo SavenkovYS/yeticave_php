@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = db_get_prepare_stmt($link, $sql, [$form['cost'], $lot['id']]);
             $result = mysqli_stmt_execute($stmt);
 
-            $sql = 'INSERT INTO `bets` (`user_id`, `lot_id`, `value`, `create_time`) VALUES (?, ?, ?, ?)';
+            $sql = 'INSERT INTO `bets` (`user_id`, `lot_id`, `value`, `create_ts`) VALUES (?, ?, ?, ?)';
             $stmt = db_get_prepare_stmt($link, $sql, [$_SESSION['user']['id'], $lot['id'], $form['cost'], time()]);
             $result = mysqli_stmt_execute($stmt);
 

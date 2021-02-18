@@ -1,8 +1,11 @@
 --Добавляем пользователей
 
-INSERT INTO users (email, name, password) VALUES ('ignat.v@gmail.com', 'Игнат', '$2y$10$OqvsKHQwr0Wk6FMZDoHo1uHoXd4UdxJG/5UDtUiie00XaxMHrW8ka');
-INSERT INTO users (email, name, password) VALUES ('kitty_93@li.ru', 'Леночка', '$2y$10$bWtSjUhwgggtxrnJ7rxmIe63ABubHQs0AS0hgnOo41IEdMHkYoSVa');
-INSERT INTO users (email, name, password) VALUES ('warrior07@mail.ru', 'Руслан', '$2y$10$2OxpEH7narYpkOT1H5cApezuzh10tZEEQ2axgFOaKW.55LxIJBgWW');
+INSERT INTO users (email, name, password, message, reg_ts)
+VALUES ('ignat.v@gmail.com', 'Игнат', '$2y$10$OqvsKHQwr0Wk6FMZDoHo1uHoXd4UdxJG/5UDtUiie00XaxMHrW8ka', 'Не связывайтесь со мной', 1582041782);
+INSERT INTO users (email, name, password, message, reg_ts)
+VALUES ('kitty_93@li.ru', 'Леночка', '$2y$10$bWtSjUhwgggtxrnJ7rxmIe63ABubHQs0AS0hgnOo41IEdMHkYoSVa', 'Никак', 1592496182);
+INSERT INTO users (email, name, password, message, reg_ts)
+VALUES ('warrior07@mail.ru', 'Руслан', '$2y$10$2OxpEH7narYpkOT1H5cApezuzh10tZEEQ2axgFOaKW.55LxIJBgWW', 'По телефону', 1586707382);
 
 --Добавляем категории
 

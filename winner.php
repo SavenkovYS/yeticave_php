@@ -1,14 +1,13 @@
 <?php
-require_once ('init.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/init.php');
 
-if(!$link) {
+if (!$link) {
     $error = mysqli_connect_error();
 } else {
-
     $sql = "SELECT `id`, `expire_ts` FROM `lots` " .
-    "WHERE `winner` IS NULL AND " . time() . " >= `expire_ts`";
+    "WHERE `winner_id` IS NULL AND " . time() . " >= `expire_ts`";
     $result = mysqli_query($link, $sql);
-    if($result) {
+    if ($result) {
         $expired_lots = mysqli_fetch_all($result, MYSQLI_ASSOC);
         foreach ($expired_lots as $lot) {
             $sql = "SELECT * FROM `bets` " .

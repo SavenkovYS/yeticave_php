@@ -1,48 +1,52 @@
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    email CHAR(128),
-    password CHAR(64),
-    name CHAR(15),
-    avatar CHAR(128),
-    message TEXT
-);
-CREATE UNIQUE INDEX id ON users(id);
-CREATE UNIQUE INDEX email ON users(email);
-CREATE INDEX name ON users(name);
-
 CREATE TABLE categories (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name CHAR(20)
+    id CHAR(10) PRIMARY KEY,
+    name CHAR(15)
 );
 CREATE UNIQUE INDEX id ON categories(id);
 
 CREATE TABLE lots (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    category_id CHAR(30),
-    user_id INT,
-    bets_id INT,
-    name CHAR(100),
-    price INT,
+    id SMALLINT AUTO_INCREMENT PRIMARY KEY,
+    name CHAR(128),
+    description	TEXT,
+    price MEDIUMINT,
     step SMALLINT,
-    img CHAR(50),
-    description TEXT,
-    create_ts CHAR(50),
-    expire_ts CHAR(50),
-    bets_number INT,
-    is_open CHAR(3)
+    create_ts INT,
+    expire_ts BIGINT,
+    img	CHAR(128),
+    category_id	CHAR(20),
+    user_id	SMALLINT,
+    winner_id SMALLINT
 );
 CREATE UNIQUE INDEX id ON lots(id);
-CREATE INDEX category_id ON lots(category_id);
-CREATE INDEX user_id ON lots(user_id);
+CREATE FULLTEXT INDEX lot_search ON lots(name, description);
 CREATE INDEX price ON lots(price);
+CREATE INDEX step ON lots(step);
 CREATE INDEX create_ts ON lots(create_ts);
 CREATE INDEX expire_ts ON lots(expire_ts);
-CREATE INDEX is_open ON lots(is_open);
+CREATE INDEX category_id ON lots(category_id);
+CREATE INDEX user_id ON lots(user_id);
+CREATE INDEX winner_id ON lots(winner_id);
 
 CREATE TABLE bets (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    lots_id INT,
-    price INT
+    id SMALLINT AUTO_INCREMENT PRIMARY KEY,
+    create_ts INT,
+    value MEDIUMINT,
+    lot_id SMALLINT,
+    user_id SMALLINT
 );
 CREATE UNIQUE INDEX id ON bets(id);
+CREATE INDEX price ON bets(`value`);
+CREATE INDEX lot_id ON bets(lot_id);
+CREATE INDEX user_id ON bets(user_id);
+
+CREATE TABLE users (
+    id SMALLINT AUTO_INCREMENT PRIMARY KEY,
+    name CHAR(64),
+    email CHAR(64),
+    password CHAR(60),
+    message CHAR(255),
+    reg_ts INT,
+    avatar CHAR(128)
+);
+CREATE UNIQUE INDEX id ON users(id);
+CREATE UNIQUE INDEX email ON users(email);
