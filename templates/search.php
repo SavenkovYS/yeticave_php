@@ -25,7 +25,7 @@
         <section class="lots">
             <h2>Результаты поиска по запросу «<span><?php echo $search ?? '';?></span>»</h2>
             <ul class="lots__list">
-                <?php foreach ($lots as $lot): ?>
+                <?php if(count($lots)) : foreach ($lots as $lot): ?>
                 <li class="lots__item lot">
                     <div class="lot__image">
                         <img src="<?=$lot['img']; ?>" width="350" height="260" alt="Сноуборд">
@@ -45,6 +45,9 @@
                     </div>
                 </li>
                 <?php endforeach; ?>
+                <?php else: ?>
+                    <h2>По Вашему запросу ничего не найдено</h2>
+                <?php endif; ?>
             </ul>
         </section>
         <ul class="pagination-list">

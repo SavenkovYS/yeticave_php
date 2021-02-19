@@ -50,6 +50,9 @@
                                     Мин. ставка <span><?=set_price($lot['price'] + $lot['step']); ?></span>
                                 </div>
                             </div>
+                            <?php if($_SESSION['user']['id'] === $lot['user_id']): ?>
+                            <h3>Это Ваш лот</h3>
+                            <?php else: ?>
                             <form class="lot-item__form" action="<?="lot.php?id=" . $lot['id'];?>" method="POST">
                             <?php $classname = isset($errors['cost']) ? "form__item--invalid" : ""; ?>
                                 <p class="lot-item__form-item <?=$classname; ?>">
@@ -59,6 +62,7 @@
                                 </p>
                                 <button type="submit" class="button">Сделать ставку</button>
                             </form>
+                            <?php endif; ?>
                         </div>
                     <?php endif; ?>
                     <div class="history">
@@ -68,7 +72,7 @@
                             <tr class="history__item">
                                 <td class="history__name"><?=$bet['name']; ?></td>
                                 <td class="history__price"><?=set_price($bet['value']); ?></td>
-                                <td class="history__time"><?=set_date($bet['create_time']); ?></td>
+                                <td class="history__time"><?=set_date($bet['create_ts']); ?></td>
                             </tr>
                             <?php endforeach; ?>
                         </table>

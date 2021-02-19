@@ -1,5 +1,6 @@
 <?php
-function include_template($template, $data) {
+function include_template($template, $data)
+{
     if(is_readable($template)) {
         ob_start();
         extract($data);
@@ -12,16 +13,18 @@ function include_template($template, $data) {
     return $html;
 }
 
-function search_user_by_email($email, $users) {
+function search_user_by_email($email, $users) : array
+{
     foreach($users as $user) {
         if($user['email'] == $email) {
             return $user;
         }
     }
-    return false;
+    return [];
 }
 
-function is_email_used($email, $users) {
+function is_email_used($email, $users) : bool
+{
     foreach($users as $user) {
         if($user['email'] == $email) {
             return true;

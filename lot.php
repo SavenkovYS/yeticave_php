@@ -78,11 +78,10 @@ if (!$link) {
     $error = mysqli_connect_error();
     $page_content = include_template('./templates/lot.php', ['error' => $error]);
 } else {
-    $sql = 'SELECT u.name, b.value, b.create_time ' .
+    $sql = 'SELECT u.name, b.value, b.create_ts ' .
         'FROM `users` u ' .
         'JOIN `bets` b ON b.user_id = u.id ' .
         'WHERE lot_id=' . $lot['id'];
-
     $result = mysqli_query($link, $sql);
     if ($result) {
         $bets = mysqli_fetch_all($result, MYSQLI_ASSOC);

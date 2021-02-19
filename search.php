@@ -1,8 +1,8 @@
 <?php
-require_once ('init.php');
-require_once ('lots_list.php');
-require_once ('functions.php');
-require_once ('userdata.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/init.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/lots_list.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/userdata.php');
 
 if (!$link) {
     $error = mysqli_connect_error();
@@ -11,7 +11,7 @@ if (!$link) {
     $search = mysqli_real_escape_string($link, $search);
 
     $sql = "SELECT * FROM `lots` " .
-           "WHERE `name` LIKE '%$search%' OR `description` LIKE '%$search%'";
+           "WHERE MATCH(`name`, `description`) AGAINST ('%$search%' IN BOOLEAN MODE)";
     if ($result = mysqli_query($link, $sql)) {
         $lots = mysqli_fetch_all($result, MYSQLI_ASSOC);
         $page_content = include_template('./templates/search.php', [
