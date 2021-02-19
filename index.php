@@ -11,16 +11,19 @@ date_default_timezone_set('Europe/Moscow');
 $lots = set_time($lots, false);
 
 $page_content = include_template('./templates/index.php', [
-        'lots' => $lots
+    'lots' => $lots,
+    'pages' => $pages,
+    'pages_count' => $pages_count,
+    'cur_page' => $cur_page
 ]);
 
 $layout_content = include_template('./templates/layout.php', [
-        'products_categories' => $products_categories,
-        'content' => $page_content,
-        'title' => 'Главная',
-        'is_auth' => $is_auth,
-        'user_name' => $user_name,
-        'user_avatar' => $user_avatar
+    'products_categories' => $products_categories,
+    'content' => $page_content,
+    'title' => 'Главная',
+    'is_auth' => $is_auth,
+    'user_name' => $user_name,
+    'user_avatar' => $user_avatar
 ]);
 
 echo $layout_content;
