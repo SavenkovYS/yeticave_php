@@ -1,10 +1,11 @@
 <?php
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/set_time_helper.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/lots_list.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/lots_list.php');
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/userdata.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/userdata.php');
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/init.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/mysql_helper.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/mysql_helper.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/categories.php');
 
 // Устанавливаем дату в необходимом формате
 
@@ -80,8 +81,8 @@ if (!$link) {
 } else {
     $sql = 'SELECT u.name, b.value, b.create_ts ' .
         'FROM `users` u ' .
-        'JOIN `bets` b ON b.user_id = u.id ' .
-        'WHERE lot_id=' . $lot['id'];
+        'JOIN `bets` b ON b.users_id = u.id ' .
+        'WHERE lots_id=' . $lot['id'];
     $result = mysqli_query($link, $sql);
     if ($result) {
         $bets = mysqli_fetch_all($result, MYSQLI_ASSOC);

@@ -32,10 +32,10 @@
             <?php foreach($lots as $keys => $value): ?>
             <li class="lots__item lot">
                 <div class="lot__image">
-                    <img src="<?=$value['img']; ?>" width="350" height="260" alt="<?=$value['category']; ?>">
+                    <img src="<?=$value['img']; ?>" width="350" height="260" alt="<?=$value['name']; ?>">
                 </div>
                 <div class="lot__info">
-                    <span class="lot__category"><?=$value['category_id']; ?></span>
+                    <span class="lot__category"><?=$value['category']; ?></span>
                     <h3 class="lot__title">
                         <a class="text-link" href="<?="lot.php?id=" . $value['id']; ?>"><?=$value['name']; ?></a>
                     </h3>

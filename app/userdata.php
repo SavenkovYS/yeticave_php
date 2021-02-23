@@ -1,17 +1,17 @@
 <?php
-require_once ('init.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/init.php');
 
-if(!isset($_SESSION['user'])) {
+if (!isset($_SESSION['user'])) {
     session_start();
 }
 
-if(!$link) {
+if (!$link) {
     $error = mysqli_connect_error();
 } else {
     $sql = 'SELECT * FROM `users`';
     $result = mysqli_query($link, $sql);
 
-    if($result) {
+    if ($result) {
         $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
     } else {
         $error = mysqli_error($link);

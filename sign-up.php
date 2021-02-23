@@ -1,7 +1,7 @@
 <?php
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/userdata.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/lots_list.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/userdata.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/lots_list.php');
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/init.php');
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/mysql_helper.php');
 
@@ -76,14 +76,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
              'form' => $form
          ]);
      } else {
-         header("Location: /login.php");
+         header("Location: /login.php?val=success");
      }
 } else {
     $page_content = include_template('./templates/sign-up.php', []);
 }
 
 $layout_content = include_template('./templates/layout.php', [
-    'products_categories' => $products_categories,
     'content' => $page_content,
     'title' => 'Регистрация',
     'is_auth' => $is_auth,

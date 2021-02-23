@@ -1,7 +1,7 @@
 <?php
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/userdata.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/lots_list.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/userdata.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/lots_list.php');
 
 if (!isset($_SESSION)) {
     session_start();
@@ -51,7 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $layout_content = include_template('./templates/layout.php', [
     'content' => $login_content,
-    'products_categories' => $products_categories,
     'title' => 'Вход в аккаунт',
     'is_auth' => $is_auth,
     'user_name' => $user_name,

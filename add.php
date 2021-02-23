@@ -1,10 +1,11 @@
 <?php
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/lots_list.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/userdata.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/mysql_helper.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/lots_list.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/userdata.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/mysql_helper.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/categories.php');
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $lot = $_POST;
 
     $required = ['lot-name', 'category', 'message', 'lot-rate', 'lot-step', 'lot-date'];
@@ -59,19 +60,24 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = mysqli_connect_error();
             $page_content = include_template('./templates/add.php', ['error' => $error]);
         } else {
+            foreach ($products_categories as $category) {
+                if ($category['name'] === $lot['category']) {
+                    $lot['category_id'] = $category['id'];
+                }
+            }
             $query_data = [
                 htmlspecialchars($lot['lot-name']),
-                $lot['category'],
+                (int) $lot['category_id'],
                 htmlspecialchars($lot['message']),
                 "uploads/lot_img/" . $lot['path'],
-                htmlspecialchars($lot['lot-rate']),
-                htmlspecialchars($lot['lot-step']),
+                (int) htmlspecialchars($lot['lot-rate']),
+                (int) htmlspecialchars($lot['lot-step']),
                 time(),
                 strtotime($lot['lot-date']),
-                $_SESSION['user']['id']
+                (int) $_SESSION['user']['id']
             ];
 
-            $sql = 'INSERT INTO `lots` (`name`, `category_id`, `description`, `img`, `price`, `step`, `create_ts`, `expire_ts`, `user_id`)
+            $sql = 'INSERT INTO `lots` (`name`, `categories_id`, `description`, `img`, `price`, `step`, `create_ts`, `expire_ts`, `users_id`)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
 
             $stmt = db_get_prepare_stmt($link, $sql, $query_data);
@@ -99,7 +105,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 } else {
-    $page_content = include_template('./templates/add.php', ['is_auth' => $is_auth]);
+    $page_content = include_template('./templates/add.php', []);
 }
 
 $layout_content = include_template('./templates/layout.php', [

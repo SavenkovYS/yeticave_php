@@ -2,9 +2,10 @@
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/set_time_helper.php');
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/winner.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/userdata.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/userdata.php');
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/init.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/lots_list.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/lots_list.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/categories.php');
 
 date_default_timezone_set('Europe/Moscow');
 

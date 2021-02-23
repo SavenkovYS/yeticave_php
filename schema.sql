@@ -13,7 +13,7 @@ CREATE TABLE lots (
     create_ts INT,
     expire_ts BIGINT,
     img	CHAR(128),
-    category_id	CHAR(20),
+    category_id	INT,
     user_id	SMALLINT,
     winner_id SMALLINT
 );
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `yeticave`.`users` (
     `message` TEXT NOT NULL,
     `reg_ts` INT NOT NULL,
     PRIMARY KEY (`id`),
-    UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
+    UNIQUE INDEX `email_UNIQUE` (`email` ASC))
     ENGINE = InnoDB;
 
 
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `yeticave`.`categories` (
    `id` INT NOT NULL AUTO_INCREMENT,
    `name` VARCHAR(60) NOT NULL,
     PRIMARY KEY (`id`),
-    UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE)
+    UNIQUE INDEX `name_UNIQUE` (`name` ASC))
     ENGINE = InnoDB;
 
 
@@ -101,8 +101,8 @@ CREATE TABLE IF NOT EXISTS `yeticave`.`lots` (
     `users_id` INT NOT NULL,
     `categories_id` INT NOT NULL,
     PRIMARY KEY (`id`),
-    INDEX `fk_lots_users_idx` (`users_id` ASC) VISIBLE,
-    INDEX `fk_lots_categories1_idx` (`categories_id` ASC) VISIBLE,
+    INDEX `fk_lots_users_idx` (`users_id` ASC),
+    INDEX `fk_lots_categories1_idx` (`categories_id` ASC),
     CONSTRAINT `fk_lots_users`
     FOREIGN KEY (`users_id`)
     REFERENCES `yeticave`.`users` (`id`)
@@ -115,10 +115,10 @@ CREATE TABLE IF NOT EXISTS `yeticave`.`lots` (
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `yeticave`.`bets`
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `yeticave`.`bets` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `value` INT NOT NULL,
@@ -126,8 +126,8 @@ CREATE TABLE IF NOT EXISTS `yeticave`.`bets` (
     `users_id` INT NOT NULL,
     `lots_id` INT NOT NULL,
     PRIMARY KEY (`id`),
-    INDEX `fk_bets_users1_idx` (`users_id` ASC) VISIBLE,
-    INDEX `fk_bets_lots1_idx` (`lots_id` ASC) VISIBLE,
+    INDEX `fk_bets_users1_idx` (`users_id` ASC),
+    INDEX `fk_bets_lots1_idx` (`lots_id` ASC),
     CONSTRAINT `fk_bets_users1`
     FOREIGN KEY (`users_id`)
     REFERENCES `yeticave`.`users` (`id`)

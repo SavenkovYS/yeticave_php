@@ -1,8 +1,8 @@
 <?php
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/init.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/lots_list.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/lots_list.php');
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/userdata.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/userdata.php');
 
 if (!$link) {
     $error = mysqli_connect_error();

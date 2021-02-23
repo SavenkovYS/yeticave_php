@@ -1,6 +1,6 @@
 <?php
-require_once ('init.php');
-require_once ('functions.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/init.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/categories.php');
 
 if (!$link) {
     $error = mysqli_connect_error();
@@ -30,22 +30,20 @@ if (!$link) {
                 $lots[$i]['time_until_expire'] = 0;
             }
         }
+
+        // Устанавливаем категорию товара по индексу
+
+        for ($i = 0; $i < count($lots); $i++) {
+            for ($j = 0; $j < count($products_categories); $j++) {
+                if ($products_categories[$j]['id'] == $lots[$i]['categories_id']) {
+                    $lots[$i]['category'] = $products_categories[$j]['name'];
+                    break;
+                }
+            }
+        }
+
     } else {
         $error = mysqli_error($link);
     }
 }
-
-if (!$link) {
-    $error = mysqli_connect_error();
-} else {
-    $sql = 'SELECT * FROM `categories`';
-    $result = mysqli_query($link, $sql);
-
-    if ($result) {
-        $products_categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    } else {
-        $error = mysqli_error($link);
-    }
-}
-
 
