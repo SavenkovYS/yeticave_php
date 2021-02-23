@@ -22,8 +22,13 @@ if (!$link) {
     $result = mysqli_query($link, $sql);
     if ($result) {
         $lots = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
         for ($i = 0; $i < count($lots); $i++) {
-            $lots[$i]['time_until_expire'] = $lots[$i]['expire_ts'] - time();
+            if ($lots[$i]['expire_ts'] > time()) {
+                $lots[$i]['time_until_expire'] = $lots[$i]['expire_ts'] - time();
+            } else {
+                $lots[$i]['time_until_expire'] = 0;
+            }
         }
     } else {
         $error = mysqli_error($link);

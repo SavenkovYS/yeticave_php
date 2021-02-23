@@ -132,4 +132,3 @@ $layout_content = include_template('./templates/layout.php', [
 
 echo $layout_content;
 
-
