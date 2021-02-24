@@ -1,9 +1,9 @@
 <?php
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/functions.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/userdata.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/lots_list.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/init.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/mysql_helper.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/init.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/mysql_helper.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $form = $_POST;
@@ -85,7 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $layout_content = include_template('./templates/layout.php', [
     'content' => $page_content,
     'title' => 'Регистрация',
-    'is_auth' => $is_auth,
     'user_name' => $user_name,
     'user_avatar' => $user_avatar
 ]);

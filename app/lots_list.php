@@ -1,6 +1,6 @@
 <?php
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/init.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/categories.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/init.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/categories.php');
 
 if (!$link) {
     $error = mysqli_connect_error();

@@ -1,11 +1,11 @@
 <?php
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/set_time_helper.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/winner.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/userdata.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/init.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/lots_list.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/categories.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/set_time_helper.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/functions.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/winner.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/userdata.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/init.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/lots_list.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/categories.php');
 
 date_default_timezone_set('Europe/Moscow');
 
@@ -22,7 +22,6 @@ $layout_content = include_template('./templates/layout.php', [
     'products_categories' => $products_categories,
     'content' => $page_content,
     'title' => 'Главная',
-    'is_auth' => $is_auth,
     'user_name' => $user_name,
     'user_avatar' => $user_avatar
 ]);

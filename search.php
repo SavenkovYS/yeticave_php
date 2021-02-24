@@ -1,8 +1,9 @@
 <?php
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/init.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/init.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/lots_list.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/functions.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/userdata.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/categories.php');
 
 if (!$link) {
     $error = mysqli_connect_error();
@@ -28,18 +29,16 @@ if (!$link) {
         "WHERE MATCH(`name`, `description`) AGAINST ('%$search%' IN BOOLEAN MODE) " .
         "ORDER BY `expire_ts` DESC LIMIT " . $page_items . " OFFSET " . $offset;
 
-    $result = mysqli_query($link, $sql);
-    if ($result) {
-        $lots = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    } else {
-        $error = mysqli_error($link);
-    }
-
-    $sql = "SELECT * FROM `lots` " .
-           "WHERE MATCH(`name`, `description`) AGAINST ('%$search%' IN BOOLEAN MODE)";
-
     if ($result = mysqli_query($link, $sql)) {
         $lots = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        for ($i = 0; $i < count($lots); $i++) {
+            for ($j = 0; $j < count($products_categories); $j++) {
+                if ($products_categories[$j]['id'] == $lots[$i]['categories_id']) {
+                    $lots[$i]['category'] = $products_categories[$j]['name'];
+                    break;
+                }
+            }
+        }
         $page_content = include_template('./templates/search.php', [
             'lots' => $lots,
             'pages' => $pages,
@@ -48,7 +47,8 @@ if (!$link) {
             'search' => $search
         ]);
     } else {
-        $page_content = include_template('./templates/search.php', []);
+        $error = mysqli_error($link);
+        $page_content = include_template('./templates/search.php', ['error' => $error]);
     }
 }
 
@@ -56,7 +56,6 @@ $layout_content = include_template('./templates/layout.php', [
     'products_categories' => $products_categories,
     'content' => $page_content,
     'title' => 'Поиск',
-    'is_auth' => $is_auth,
     'user_name' => $user_name,
     'user_avatar' => $user_avatar
 ]);

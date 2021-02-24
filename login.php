@@ -1,5 +1,5 @@
 <?php
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/functions.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/userdata.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/lots_list.php');
 
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
 
     foreach ($required as $field) {
-        if(empty($form[$field])) {
+        if (empty($form[$field])) {
             $errors[$field] = 'Это поле надо заполнить';
         }
     }
@@ -52,7 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $layout_content = include_template('./templates/layout.php', [
     'content' => $login_content,
     'title' => 'Вход в аккаунт',
-    'is_auth' => $is_auth,
     'user_name' => $user_name,
     'user_avatar' => $user_avatar
 ]);

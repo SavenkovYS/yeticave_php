@@ -1,4 +1,12 @@
 <?php
+/**
+ * Преобразовывает временные метки в массиве лотов во время в формате H:i либо H:i:s
+ *
+ * @param array $array Массив лотов
+ * @param bool $should_set_seconds Необходимо ли устанавливать секунды
+ *
+ * @return array Преобразованный массив
+ */
 function set_time($array = [], $should_set_seconds = false) : array
 {
     if(count($array)) {

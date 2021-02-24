@@ -1,11 +1,11 @@
 <?php
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/set_time_helper.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/lots_list.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/userdata.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/init.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/mysql_helper.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/categories.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/set_time_helper.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/lots_list.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/functions.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/userdata.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/init.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/mysql_helper.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/categories.php');
 
 // Устанавливаем дату в необходимом формате
 
@@ -48,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $page_content = include_template('./templates/lot.php', [
             'errors' => $errors,
             'lot' => $lot,
-            'is_auth' => $is_auth
         ]);
     } else {
         if (!$link) {
@@ -59,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = db_get_prepare_stmt($link, $sql, [$form['cost'], $lot['id']]);
             $result = mysqli_stmt_execute($stmt);
 
-            $sql = 'INSERT INTO `bets` (`user_id`, `lot_id`, `value`, `create_ts`) VALUES (?, ?, ?, ?)';
+            $sql = 'INSERT INTO `bets` (`users_id`, `lots_id`, `value`, `create_ts`) VALUES (?, ?, ?, ?)';
             $stmt = db_get_prepare_stmt($link, $sql, [$_SESSION['user']['id'], $lot['id'], $form['cost'], time()]);
             $result = mysqli_stmt_execute($stmt);
 
@@ -118,14 +117,12 @@ setcookie($counter_name, $counter_value, $expire, $path);
 
 $page_content = include_template('./templates/lot.php', [
     'lot' => $lot,
-    'is_auth' => $is_auth,
     'bets' => $bets
 ]);
 
 $layout_content = include_template('./templates/layout.php', [
     'title' => $lot['name'],
     'content' => $page_content,
-    'is_auth' => $is_auth,
     'user_name' => $user_name,
     'user_avatar' => $user_avatar,
     'products_categories' => $products_categories,

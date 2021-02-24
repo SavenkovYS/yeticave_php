@@ -1,7 +1,7 @@
 <?php
 function include_template($template, $data)
 {
-    if(is_readable($template)) {
+    if (is_readable($template)) {
         ob_start();
         extract($data);
         require_once($template);
@@ -15,8 +15,8 @@ function include_template($template, $data)
 
 function search_user_by_email($email, $users) : array
 {
-    foreach($users as $user) {
-        if($user['email'] == $email) {
+    foreach ($users as $user) {
+        if ($user['email'] == $email) {
             return $user;
         }
     }
@@ -25,8 +25,8 @@ function search_user_by_email($email, $users) : array
 
 function is_email_used($email, $users) : bool
 {
-    foreach($users as $user) {
-        if($user['email'] == $email) {
+    foreach ($users as $user) {
+        if ($user['email'] == $email) {
             return true;
         }
     }

@@ -1,4 +1,11 @@
 <?php
+/**
+ * Преобразует цену в необходимый формат
+ *
+ * @param string $price Цена
+ *
+ * @return string Преобразованная цена
+ */
 function set_price($price) : string
 {
     $formated_price = ceil($price);

@@ -1,4 +1,11 @@
 <?php
+/**
+ * Преобразует временную метку Unix в необходимый формат
+ *
+ * @param int $ts Временная метка
+ *
+ * @return string Дата в необходимом формате
+ */
 const HOUR = 3600;
 function set_date($ts) : string
 {

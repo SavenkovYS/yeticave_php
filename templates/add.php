@@ -1,4 +1,4 @@
-<?php if($is_auth): ?>
+<?php if(isset($_SESSION['user'])): ?>
 <?php if(isset($error)): ?>
 <h1>Просим прощения - произошла ошибка</h1>
 <?php else: ?>

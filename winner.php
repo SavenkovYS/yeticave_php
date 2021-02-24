@@ -1,5 +1,5 @@
 <?php
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/init.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/init.php');
 
 if (!$link) {
     $error = mysqli_connect_error();

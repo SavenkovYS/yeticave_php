@@ -1,3 +1,4 @@
+<?php require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/set_price_helper.php'); ?>
 <main>
     <nav class="nav">
         <ul class="nav__list container">
@@ -31,12 +32,12 @@
                         <img src="<?=$lot['img']; ?>" width="350" height="260" alt="Сноуборд">
                     </div>
                     <div class="lot__info">
-                        <span class="lot__category"><?=$lot['category_id']; ?></span>
-                        <h3 class="lot__title"><a class="text-link" href="lot.html"><?=$lot['name']; ?></a></h3>
+                        <span class="lot__category"><?=$lot['category']; ?></span>
+                        <h3 class="lot__title"><a class="text-link" href="<?='lot.php?id=' . $lot['id']; ?>"><?=$lot['name']; ?></a></h3>
                         <div class="lot__state">
                             <div class="lot__rate">
                                 <span class="lot__amount">Стартовая цена</span>
-                                <span class="lot__cost"><?=$lot['price']; ?><b class="rub">р</b></span>
+                                <span class="lot__cost"><?=set_price($lot['price']); ?><b class="rub">р</b></span>
                             </div>
                             <div class="lot__timer timer">
                                 16:54:12

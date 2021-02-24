@@ -6,5 +6,6 @@
 *.psd
 *.sublime*
 pages
+queries.sql
 Thumbs.db
 vendor

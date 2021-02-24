@@ -1,5 +1,8 @@
 <?php require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/set_price_helper.php'); ?>
 <?php require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/set_date_helper.php'); ?>
+<?php if (isset($error)): ?>
+<h1>Простите, произошла ошибка</h1>
+<?php else: ?>
 <main>
     <nav class="nav">
         <ul class="nav__list container">
@@ -24,7 +27,7 @@
         </ul>
     </nav>
     <?php
-    if(isset($lot)): ?>
+    if (isset($lot)): ?>
         <section class="lot-item container">
             <h2><?=$lot['name']; ?></h2>
             <div class="lot-item__content">
@@ -36,7 +39,7 @@
                     <p class="lot-item__description"><?=$lot['description']; ?></p>
                 </div>
                 <div class="lot-item__right">
-                    <?php if($is_auth): ?>
+                    <?php if(isset($_SESSION['user'])): ?>
                         <div class="lot-item__state">
                             <div class="lot-item__timer timer">
                                 <?=$lot['time_until_expire']; ?>
@@ -82,5 +85,6 @@
         </section>
     <?php else: ?>
         <h1>Ничего не найдено</h1>
+    <?php endif; ?>
     <?php endif; ?>
 </main>

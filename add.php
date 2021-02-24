@@ -1,9 +1,9 @@
 <?php
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/lots_list.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/userdata.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/mysql_helper.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/app/categories.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/functions.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/lots_list.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/userdata.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/mysql_helper.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/categories.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $lot = $_POST;
@@ -67,14 +67,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             $query_data = [
                 htmlspecialchars($lot['lot-name']),
-                (int) $lot['category_id'],
+                $lot['category_id'],
                 htmlspecialchars($lot['message']),
                 "uploads/lot_img/" . $lot['path'],
-                (int) htmlspecialchars($lot['lot-rate']),
-                (int) htmlspecialchars($lot['lot-step']),
+                htmlspecialchars($lot['lot-rate']),
+                htmlspecialchars($lot['lot-step']),
                 time(),
                 strtotime($lot['lot-date']),
-                (int) $_SESSION['user']['id']
+                $_SESSION['user']['id']
             ];
 
             $sql = 'INSERT INTO `lots` (`name`, `categories_id`, `description`, `img`, `price`, `step`, `create_ts`, `expire_ts`, `users_id`)
@@ -100,7 +100,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $page_content = include_template('./templates/add.php', [
             'lot' => $lot,
             'errors' => $errors,
-            'is_auth' => $is_auth
         ]);
     }
 
@@ -112,7 +111,6 @@ $layout_content = include_template('./templates/layout.php', [
     'products_categories' => $products_categories,
     'content' => $page_content,
     'title' => 'Добавить лот',
-    'is_auth' => $is_auth,
     'user_name' => $user_name,
     'user_avatar' => $user_avatar
 ]);
